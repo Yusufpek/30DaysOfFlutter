@@ -26,7 +26,7 @@ class LikedSuggestions extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Saved Suggestions'),
+        title: Text('Liked Suggestions'),
       ),
       body: ListView(children: divided),
     );
