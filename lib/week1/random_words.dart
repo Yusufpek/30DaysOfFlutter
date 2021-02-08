@@ -1,9 +1,8 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
-import '../day1/fonts.dart';
-import '../day1/liked_suggestions.dart';
-
+import 'liked_suggestions.dart';
+import 'fonts.dart';
 
 class RandomWords extends StatefulWidget {
   @override
@@ -11,7 +10,6 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-
   final List<WordPair> _suggestions = <WordPair>[];
   final Set<WordPair> _liked = Set<WordPair>();
 
@@ -32,8 +30,11 @@ class _RandomWordsState extends State<RandomWords> {
     final bool _alreadyLiked = _liked.contains(w);
     return ListTile(
       leading: CircleAvatar(
-        backgroundColor: Colors.orange,
-        child: Text('${i + 1}',style: TextStyle(color: Colors.white),)),
+          backgroundColor: Colors.orange,
+          child: Text(
+            '${i + 1}',
+            style: TextStyle(color: Colors.white),
+          )),
       title: Text(
         '${w.asPascalCase}',
         style: biggerFont,
@@ -42,11 +43,11 @@ class _RandomWordsState extends State<RandomWords> {
         _alreadyLiked ? Icons.favorite : Icons.favorite_border,
         color: _alreadyLiked ? Colors.orange : Colors.grey,
       ),
-      onTap: (){
+      onTap: () {
         setState(() {
-          if(_alreadyLiked){
+          if (_alreadyLiked) {
             _liked.remove(w);
-          }else{
+          } else {
             _liked.add(w);
           }
         });
@@ -54,9 +55,11 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  void _pushSaved(){
-    Navigator.of(context).push(MaterialPageRoute(builder: (c)=>LikedSuggestions(_liked)));
+  void _pushSaved() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (c) => LikedSuggestions(_liked)));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,7 @@ class _RandomWordsState extends State<RandomWords> {
           title: Text('Flutter Event Day 1'),
           centerTitle: true,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.favorite), onPressed:_pushSaved)
+            IconButton(icon: Icon(Icons.favorite), onPressed: _pushSaved)
           ],
         ),
         body: _buildSuggestions());

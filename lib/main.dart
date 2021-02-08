@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'day1/random_words.dart';
+import 'week1/random_words.dart';
+import 'week2/app.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(ShrineApp());
 
+//It is for week1 project
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
