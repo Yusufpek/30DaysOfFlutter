@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yi_30_days_of_flutter/week2/color.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,9 +9,30 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final Color _unfocusedColor = Colors.grey[600];
+  Color _focusedColor;
+  final FocusNode _usernameFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  //
+  final _circularBorder = BeveledRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(7.0)),
+  );
   void _clear() {
     _usernameController.clear();
     _passwordController.clear();
+  }
+
+  @override
+  void initState() {
+    _usernameFocusNode.addListener(() => setState(() {}));
+    _passwordFocusNode.addListener(() => setState(() {}));
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _focusedColor = Theme.of(context).accentColor;
+    super.didChangeDependencies();
   }
 
   @override
@@ -23,20 +45,25 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[
-                Image.asset('assets/diamond.png'),
+                Image.asset(
+                  'assets/diamond.png',
+                  color: kShrineBlack,
+                ),
                 SizedBox(height: 16.0),
                 Text('SHRINE'),
               ],
             ),
             SizedBox(height: 120.0),
-            // tODO: Wrap Username with AccentColorOverride (103)
-            // tODO: Remove filled: true values (103)
-            // tODO: Wrap Password with AccentColorOverride (103)
             TextField(
               controller: _usernameController,
+              focusNode: _usernameFocusNode,
               decoration: InputDecoration(
-                filled: true,
                 labelText: 'Username',
+                labelStyle: TextStyle(
+                  color: _usernameFocusNode.hasFocus
+                      ? _focusedColor
+                      : _unfocusedColor,
+                ),
               ),
             ),
             SizedBox(
@@ -44,9 +71,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextField(
               controller: _passwordController,
+              focusNode: _passwordFocusNode,
               decoration: InputDecoration(
-                filled: true,
                 labelText: 'Password',
+                labelStyle: TextStyle(
+                  color: _passwordFocusNode.hasFocus
+                      ? _focusedColor
+                      : _unfocusedColor,
+                ),
               ),
               obscureText: true,
             ),
@@ -58,10 +90,13 @@ class _LoginPageState extends State<LoginPage> {
                 FlatButton(
                   onPressed: _clear,
                   child: Text('Cancel !'),
+                  shape: _circularBorder,
                 ),
                 RaisedButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text('Next !'),
+                  elevation: 8,
+                  shape: _circularBorder,
                 ),
               ],
             ),
