@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yi_30_days_of_flutter/week2/color.dart';
+
+import 'colors.dart';
 
 class LoginPage extends StatefulWidget {
   @override

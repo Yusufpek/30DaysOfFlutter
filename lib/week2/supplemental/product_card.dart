@@ -42,7 +42,7 @@ class ProductCard extends StatelessWidget {
               Text(
                 product == null ? '' : product.name,
                 style: theme.textTheme.headline6,
-                softWrap: false,
+                softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               ),
